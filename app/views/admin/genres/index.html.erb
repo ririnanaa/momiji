@@ -1,0 +1,16 @@
+<h1>ジャンル一覧・追加</h1>
+
+<!--ジャンル新規登録 -->
+<%= render 'new', genre: @genre %>
+
+ <!--ジャンル一覧 -->
+ 
+ <h5>ジャンル一覧</h5>
+ <% @genres.each do |genre| %>
+ 
+ <div><%= genre.name %></div>
+ <div><%= link_to '編集', edit_admin_genre_path(genre.id) %></div>
+ <div><%= link_to '削除', admin_genre_path(genre.id),  method: :delete, "data-confirm" => "本当に削除しますか？"  %></div>
+ 
+ <% end %>
+ 

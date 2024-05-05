@@ -1,0 +1,14 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+<div>
+  <%= flash[:alert] %>
+</div>
+
+<%= form_with model: genre, url: admin_genres_path, method: :post, local:true do |f| %>
+
+  <h5>ジャンル名</h5>
+  <div><%= f.text_field :name, placeholder: "江戸時代" %></div>
+  <div><%= f.submit '登録' %></div>
+  
+<% end %>

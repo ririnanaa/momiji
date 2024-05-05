@@ -1,0 +1,29 @@
+<h1>カテゴリー　一覧・追加</h1>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div>
+  <%= flash[:alert] %>
+</div>
+
+
+<!--カテゴリー新規登録 -->
+<%= form_with model: @category, url: admin_categories_path, method: :post, local:true do |f| %>
+
+  <h5>カテゴリー名</h5>
+  <div><%= f.text_field :name, placeholder: "絵画" %></div>
+  <div><%= f.submit '登録' %></div>
+  
+<% end %>
+
+ <!--カテゴリー　一覧 -->
+ 
+ <h5>カテゴリー　一覧</h5>
+ <% @categories.each do |category| %>
+ 
+ <div><%= category.name %></div>
+ <div><%= link_to '編集', edit_admin_category_path(category.id) %></div>
+ <div><%= link_to '削除', admin_category_path(category.id),  method: :delete, "data-confirm" => "本当に削除しますか？"  %></div>
+ 
+ <% end %>
+ 
