@@ -33,8 +33,13 @@ class Admin::CategoriesController < ApplicationController
   
   def destroy
     category = Category.find(params[:id])
-    category.destroy
-    redirect_to admin_categories_path
+    if category.destroy
+      flash[:notice] = "削除に成功しました"
+      redirect_to admin_categories_path
+    else
+      flash[:alert] = "削除に失敗しました"
+      render :index
+    end
   end
   
   private

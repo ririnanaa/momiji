@@ -3,8 +3,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
     create_table :posts do |t|
       
       t.integer :user_id, null: false
-      t.integer :genre_id, null: false
-      t.integer :category_id, null: false
+      t.integer :genre_id
+      t.integer :category_id
       t.string :name, null: false
       t.string :daytime, null: false
       t.string :place, null: false

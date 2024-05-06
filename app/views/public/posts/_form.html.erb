@@ -1,0 +1,34 @@
+<% if post.errors.any? %>
+  <%= post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: post, local:true do |f| %>
+  <h5>ポスター写真</h5>
+  <%= f.file_field :post_image, accept: "image/*" %>
+  <h5>展覧会名</h5>
+  <%= f.text_field :name, placeholder: "北斎展" %>
+  <h5>開催日時</h5>
+  <%= f.text_area :daytime, placeholder: "〇月〇日〜〇月×日　9時〜17時　休館日：月曜日" %>
+  <h5>会場</h5>
+  <%= f.text_field :place, placeholder: "〇〇博物館" %>
+  <h5>会場住所</h5>
+  <%= f.text_field :address, placeholder: "東京都港区六本木〇ー〇ー〇" %>
+  <h5>説明</h5>
+  <%= f.text_area :body, placeholder: "750文字以内" %>
+  
+  <h5>ジャンル選択（複数選択可）</h5>
+  
+    <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %>
+    
+  
+  <h5>カテゴリー選択（複数選択可）</h5>
+ 
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>  
+  
+  <%= f.submit '保存' %>
+<% end %>
