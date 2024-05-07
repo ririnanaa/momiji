@@ -21,7 +21,14 @@
     <%= category.name %>
   <% end %> 
   <h5>投稿者</h5>
-  <%= @post.user.name %>
+  <%= link_to "/#{@post.user.name}" do %>
+    <%= @post.user.name %>
+  <% end %>  
+  <% if @post.user.is_general %>
+    <p>一般</p>
+  <% else %>  
+    <p>開催者</p>
+  <% end %>  
   
   <% if @post.user == current_user %> 
     <%= link_to "編集", edit_post_path(@post.id) %>
