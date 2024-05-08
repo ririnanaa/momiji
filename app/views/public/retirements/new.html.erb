@@ -1,0 +1,9 @@
+<h1>退会の確認</h1>
+
+ <p>退会した場合、ユーザーに関するデータが全て削除されます。<br>
+       これまでの投稿やレビューも削除されます。<br>
+       退会する場合は、「退会する」をクリックしてください。</p>
+ 
+ <%= link_to "退会する", retirement_path(current_user), method: :delete, data: {confirm: "本当に退会しますか？"} %>
+ <%= link_to "戻る", "/#{current_user.name}/edit" %>
+ 

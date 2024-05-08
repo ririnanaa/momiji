@@ -1,7 +1,7 @@
-<h1>投稿詳細画面</h1>
+<h1>投稿詳細</h1>
 
 <div> 
-  <%= image_tag @post.get_post_image(200,200) %>
+  <%= image_tag @post.post_image, size:'350x300' %>
   <h5>展覧会名</h5>
   <%= @post.name %> 
   <h5>開催日時</h5>
@@ -21,7 +21,7 @@
     <%= category.name %>
   <% end %> 
   <h5>投稿者</h5>
-  <%= link_to "/#{@post.user.name}" do %>
+  <%= link_to admin_user_path(@post.user.id) do %>
     <%= @post.user.name %>
   <% end %>  
   <% if @post.user.is_general %>
@@ -29,9 +29,6 @@
   <% else %>  
     <p>開催者</p>
   <% end %>  
-  
-  <% if @post.user == current_user %> 
-    <%= link_to "編集", edit_post_path(@post.id) %>
-    <%= link_to "削除",  post_path(@post.id),  method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>  
-</div>
+ 
+
+<%= link_to "削除",  admin_post_path(@post.id),  method: :delete, "data-confirm" => "本当に削除しますか？" %>

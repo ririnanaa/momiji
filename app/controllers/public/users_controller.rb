@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_normal_user, only: [:update]
   
   def show
     @posts = @user.posts
@@ -35,7 +36,13 @@ class Public::UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:profile_image, :name, :introduction )
+    params.require(:user).permit(:profile_image, :name, :introduction, :email )
   end
  
+  def ensure_normal_user
+    if @user.email == 'guest@example.com'
+      redirect_to root_path
+      flash[:alert] = 'ゲストユーザーは更新できません。'
+    end
+  end
 end

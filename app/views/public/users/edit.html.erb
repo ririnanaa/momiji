@@ -1,7 +1,10 @@
 <h1>プロフィール編集</h1>
+
 <%= form_with model: @user, url: "/#{@user.name}", method: :patch, local:true do |f| %>
   <%= f.label :"ユーザー名" %>(半角英字)
-  <%= f.text_field :name, placeholder:"ユーザー名" %>
+  <%= f.text_field :name %>
+  <%= f.label :"メールアドレス" %>
+  <%= f.text_field :email %>
   <%= f.label :"自己紹介" %>
   <%= f.text_area :introduction, placeholder:"こんにちは！" %>
   <%= f.label :"アイコン画像" %>
@@ -9,3 +12,4 @@
   <%= f.submit "変更を保存" %>
 <% end %>
 
+<%= link_to "退会する", new_retirement_path %>

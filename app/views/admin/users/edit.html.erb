@@ -1,0 +1,21 @@
+<h1>プロフィール編集</h1>
+<%= form_with model: @user, url: admin_user_path(@user.id), local:true do |f| %>
+  <%= f.label :"ユーザー名" %>(半角英字)
+  <%= f.text_field :name %>
+  <%= f.label :"メールアドレス" %>
+  <%= f.text_field :email %>
+  <%= f.label :"アイコン画像" %>
+  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>  
+  <%= f.radio_button :is_general, true %>
+  <%= f.label :is_general_true, "一般" %>
+  <%= f.radio_button :is_general, false %>
+  <%= f.label :is_general_false, "開催者" %>
+  <p>アカウント停止</p>
+  <%= f.radio_button :is_active, true %>
+  <%= f.label :is_active_true, "有効" %>
+  <%= f.radio_button :is_active, false %>
+  <%= f.label :is_active_false, "停止" %>
+  <%= f.submit "変更を保存" %>
+<% end %>
+
+<%= link_to "退会", admin_user_path(@user.id), method: :delete, "data-confirm" => "本当に退会させますか？" %>

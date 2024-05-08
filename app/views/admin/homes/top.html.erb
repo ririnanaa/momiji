@@ -1,2 +1,23 @@
 <h1>管理者TOPページ</h1>
 
+<h4>ユーザー一覧</h4>
+<% @users.each do |user| %>
+  <p>ユーザー名：　</p>
+  <%= link_to admin_user_path(user.id) do %>
+  <%= user.name %>
+  <% end %>
+  <p>メールアドレス：　<%= user.email %></p>
+  <p>会員情報</p>
+  <% if user.is_general %>
+    <p>一般</p>
+  <% else %>  
+    <p>開催者</p>
+  <% end %> 
+  <p>ステータス</p>
+  <% if user.is_active %>
+    <p>有効</p>
+  <% else %>  
+    <p>退会</p>
+  <% end %>  
+  
+<% end %>

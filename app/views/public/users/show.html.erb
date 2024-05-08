@@ -1,5 +1,10 @@
-<%= render 'info', {user: @user, posts: @posts} %>
+<% if @user.is_active %>
+<%= render 'info', user: @user %>
 
 <% if @user == current_user %>
 <%= link_to "プロフィール編集", "/#{current_user.name}/edit" %>
+<% end %>
+
+<%= render 'userpost', {user: @user, posts: @posts} %>
+
 <% end %>

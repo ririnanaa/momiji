@@ -1,0 +1,36 @@
+<!-- ユーザー詳細 -->
+<%= render 'public/users/info', user: @user %>
+<%= @user.email %>
+<%= link_to "編集", edit_admin_user_path(@user.id) %>
+
+<!-- ユーザー投稿一覧 -->
+<h2><%= @user.name %>さんの投稿一覧</h2>
+<% @posts.each do |post| %>
+<div>
+  <%= link_to admin_post_path(post.id) do %>
+    <%= image_tag post.post_image, size:'200x150' %>
+  <% end %>
+  
+  <h5>展覧会名</h5>
+  <%= link_to admin_post_path(post.id) do %>
+  <%= post.name %>
+  <% end %>
+  
+  <h5>開催日時</h5>
+  <%= post.daytime %>
+  <h5>会場</h5>
+  <%= post.place %>
+  <h5>会場住所</h5>
+  <%= post.address %>
+  <h5>説明</h5>
+  <%= post.body %>
+  <h5>ジャンル</h5>
+  <% post.genres.each do |genre| %>
+    <%= genre.name %>
+  <% end %>
+  <h5>カテゴリー</h5>
+  <% post.categories.each do |category| %>
+    <%= category.name %>
+  <% end %>
+</div>
+<% end %>
