@@ -8,27 +8,39 @@
 <% end %>
 
 <%= form_with model: post, local:true do |f| %>
-  <h5>ポスター写真</h5>
-  <%= f.file_field :post_image, accept: "image/*" %>
-  <h5>展覧会名</h5>
-  <%= f.text_field :name, placeholder: "北斎展" %>
-  <h5>開催日時</h5>
-  <%= f.text_area :daytime, placeholder: "〇月〇日〜〇月×日　9時〜17時　休館日：月曜日" %>
-  <h5>会場</h5>
-  <%= f.text_field :place, placeholder: "〇〇博物館" %>
-  <h5>会場住所</h5>
-  <%= f.text_field :address, placeholder: "東京都港区六本木〇ー〇ー〇" %>
-  <h5>説明</h5>
-  <%= f.text_area :body, placeholder: "750文字以内" %>
-  
-  <h5>ジャンル選択（複数選択可）</h5>
-  
-    <%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %>
-    
-  
-  <h5>カテゴリー選択（複数選択可）</h5>
- 
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>  
-  
-  <%= f.submit '保存' %>
+  <div class="mb-2">ポスター写真<br>
+    <%= f.file_field :post_image, accept: "image/*" %>
+  </div>
+  <div class="mb-2">展覧会名<br>
+    <%= f.text_field :name, placeholder: "北斎展" %>
+  </div>
+  <div class="mb-2">会期<br>
+    <%= f.text_field :day, placeholder: "〇月〇日〜〇月×日" %>
+  </div>
+  <div class="mb-2">休館日<br>
+    <%= f.text_field :close_day, placeholder: "月曜日" %>
+  </div>
+  <div class="mb-2">開館時間<br>
+    <%= f.text_field :hour, placeholder: "10時〜17時" %>
+  </div>
+  <div class="mb-2">会場<br>
+    <%= f.text_field :place, placeholder: "〇〇博物館" %>
+  </div>
+  <div class="mb-2">会場住所<br>
+    <%= f.text_field :address, size: "30x5", placeholder: "東京都港区六本木〇ー〇ー〇" %>
+  </div>
+  <div class="mb-2">説明<br>
+    <%= f.text_area :body, size: "30x5", placeholder: "750文字以内" %>
+  </div>
+  <div class="mb-2">公式サイトURL<br>
+    <%= f.text_field :url, size: "30x5" %>
+  </div>
+  <div class="mb-2">ジャンル選択（複数選択可）</div>
+  <div class="mb-2"><%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %></div> 
+  <div class="mb-2">カテゴリー選択（複数選択可）</div>
+  <div class="mb-2"><%= f.collection_check_boxes :category_ids, Category.all, :id, :name %></div>  
+  <div class="d-flex justify-content-end mb-2">
+    <%= f.submit '保存', class: "btn btn-outline-success btn-lg" %>
+  </div>  
 <% end %>
+

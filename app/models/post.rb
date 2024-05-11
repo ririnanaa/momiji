@@ -15,10 +15,13 @@ class Post < ApplicationRecord
     post_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  validates :name, presence: true
-  validates :daytime, presence: true
-  validates :place, presence: true
-  validates :address, presence: true
+  validates :post_image, presence: true
+  validates :name, presence: true, length: { in: 1..75 }
+  validates :day, presence: true, length: { in: 1..100 }
+  validates :close_day, presence: true, length: { in: 1..100 }
+  validates :hour, presence: true, length: { in: 1..100 }
+  validates :place, presence: true, length: { in: 1..75 }
+  validates :address, presence: true, length: { in: 1..100 }
   validates :body, presence: true, length: { in: 1..750 }
   validates :genre_id, acceptance: true
   validates :category_id, acceptance: true

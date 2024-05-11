@@ -1,15 +1,41 @@
-<h1>プロフィール編集</h1>
-
-<%= form_with model: @user, url: "/#{@user.name}", method: :patch, local:true do |f| %>
-  <%= f.label :"ユーザー名" %>(半角英字)
-  <%= f.text_field :name %>
-  <%= f.label :"メールアドレス" %>
-  <%= f.text_field :email %>
-  <%= f.label :"自己紹介" %>
-  <%= f.text_area :introduction, placeholder:"こんにちは！" %>
-  <%= f.label :"アイコン画像" %>
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>  
-  <%= f.submit "変更を保存" %>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
-<%= link_to "退会する", new_retirement_path %>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">プロフィール編集</h2>
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      <%= form_with model: @user, url: "/#{@user.name}", method: :patch, local:true do |f| %>
+        <div class="mb-3">
+          <%= f.label :"ユーザー名" %>(半角英字)<br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"メールアドレス" %><br>
+          <%= f.text_field :email,  size: "30x5" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"自己紹介" %>(300文字まで)<br>
+          <%= f.text_area :introduction, size: "30x5", placeholder: "こんにちは" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"アイコン画像" %><br>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+        </div>
+        <div class="d-flex justify-content-end mb-3">
+          <div class="m-2"><%= f.submit "変更を保存", class: "btn btn-outline-success" %></div>
+          <div class="m-2"><%= link_to "戻る", "/#{@user.name}", class: "btn btn-outline-secondary" %></div>
+        </div>  
+      <% end %>
+      <div class="d-flex justify-content-end mb-3">
+        <%= link_to "退会する", new_retirement_path, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

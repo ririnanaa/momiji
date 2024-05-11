@@ -1,0 +1,85 @@
+<!-- 投稿詳細 -->
+<div class="col-md-3 pt-5">
+  <%= image_tag post.get_post_image(210,297) %>
+</div>
+<div class="col-md-7 offset-md-2 mx-auto pt-5">
+  <div class="d-flex">
+    <div class="m-2 text-secondary">展覧会名</div>
+    <div class="m-2"><%= post.name %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">会期</div>
+    <div class="m-2"><%= post.day %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">休館日</div>
+    <div class="m-2"><%= post.close_day %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">開館時間</div>
+    <div class="m-2"><%= post.hour %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">会場名</div>
+    <div class="m-2"><%= post.place %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">会場住所</div>
+    <div class="m-2"><%= post.address %></div>
+  </div>
+  <div class="m-2">
+    <div class="text-secondary">説明</div>
+    <div class="mt-2"><%= post.body %></div>
+  </div>  
+  <div class="d-flex">
+    <div class="m-2 text-secondary">公式サイト</div>
+    <div class="m-2"><%= link_to post.url, post.url, class: "text-dark" %></div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">ジャンル</div>
+    <div class="m-2">
+      <% post.genres.each do |genre| %>
+        <%= genre.name %>
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">カテゴリー</div>
+    <div class="m-2">
+      <% post.categories.each do |category| %>
+        <%= category.name %>
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="m-2 text-secondary">投稿者</div>
+    <div class="m-2">
+    <% if admin_signed_in? %>
+      <%= link_to post.user.name, admin_user_path(post.user.id), class: "text-dark" %>
+    <% else %>
+      <%= link_to post.user.name, "/#{post.user.name}", class: "text-dark" %>
+    <% end %>
+    </div>
+    <div class="m-2">
+    <% if post.user.is_general %>
+      (一般)
+    <% else %>
+      (開催者)
+    <% end %>
+    </div>
+    <div class="d-flex">
+    <% if post.user == current_user %>
+      <div class="m-2">
+        <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-outline-primary" %>
+      </div>
+      <div class="m-2">
+        <%= link_to "削除",  post_path(@post.id), class: "btn btn-outline-danger",  method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </div>
+    <% end %>
+    <% if admin_signed_in? %>
+      <div class="m-2">
+        <%= link_to "削除",  admin_post_path(@post.id), class: "btn btn-outline-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </div>
+    <% end %>
+    </div>
+  </div>

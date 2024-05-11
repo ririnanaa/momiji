@@ -1,9 +1,20 @@
-<h1>退会の確認</h1>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">退会手続き</h2>
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
 
- <p>退会した場合、ユーザーに関するデータが全て削除されます。<br>
-       これまでの投稿やレビューも削除されます。<br>
-       退会する場合は、「退会する」をクリックしてください。</p>
+ 　  　<p>退会した場合、ユーザーに関するデータが全て削除されます。<br>
+         これまでの投稿やレビューも削除されます。<br>
+         退会する場合は、「退会する」をクリックしてください。</p>
  
- <%= link_to "退会する", retirement_path(current_user), method: :delete, data: {confirm: "本当に退会しますか？"} %>
- <%= link_to "戻る", "/#{current_user.name}/edit" %>
- 
+      <div class="d-flex">
+        <div class="m-4">  
+          <%= link_to "退会する", retirement_path(current_user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "本当に退会しますか？"} %>
+        </div>
+        <div class="m-4">
+          <%= link_to "戻る", "/#{current_user.name}", class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

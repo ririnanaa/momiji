@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
    before_action :authenticate_user!, except: [:index, :show]
+   before_action :set_post, only: [:show, :edit, :update]
    
   def new
     @post = Post.new
@@ -9,20 +10,19 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:notice] = "登録に成功しました"
+      flash[:success] = "登録に成功しました"
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = "登録に失敗しました"
+      flash.now[:danger] = "登録に失敗しました"
       render "new"
     end
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.page(params[:page]).order(created_at: :desc)
   end
   
   def show
-    @post = Post.find(params[:id])
   end
   
   def destroy
@@ -31,30 +31,31 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "削除しました"
       redirect_to posts_path
     else
-      flash.now[:alert] = "削除できませんでした"
       render :show
     end
   end
   
   def edit
-    @post = Post.find(params[:id])
   end
   
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:notice] = "変更を保存しました"
+      flash[:success] = "変更を保存しました"
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "登録に失敗しました"
       render :edit
     end
   end
   
   private
   
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  
   def post_params
-    params.require(:post).permit(:name, :post_image, :daytime, :place, :address, :body, genre_ids:[], category_ids:[])
+    params.require(:post).permit(:name, :post_image, :day, :close_day, :hour, :url, :place, :address, :body, genre_ids:[], category_ids:[])
   end
 end
 

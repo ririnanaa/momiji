@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def show
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page])
   end
   
   def edit
@@ -11,18 +11,18 @@ class Admin::UsersController < ApplicationController
   
   def update
     if @user.update(user_params)
+      flash[:success] = "変更が保存されました"
       redirect_to admin_user_path(@user.id)
-      flash[:notice] = "変更が保存されました"
     else
+      flash[:danger] = "変更に失敗しました"
       render :edit
-      flash[:alert] = "変更に失敗しました"
     end
   end
   
   def destroy
     if @user.destroy
+      flash[:success] = "退会処理に成功しました"
       redirect_to admin_path
-      flash[:notice] = "退会処理に成功しました"
     end
   end
   

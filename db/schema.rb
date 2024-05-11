@@ -87,7 +87,10 @@ ActiveRecord::Schema.define(version: 2024_05_06_050918) do
     t.integer "genre_id"
     t.integer "category_id"
     t.string "name", null: false
-    t.string "daytime", null: false
+    t.string "day", null: false
+    t.string "close_day", null: false
+    t.string "hour", null: false
+    t.text "url", null: false
     t.string "place", null: false
     t.string "address", null: false
     t.text "body", null: false

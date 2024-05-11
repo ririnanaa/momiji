@@ -1,42 +1,45 @@
-<h2>新規登録</h2>
+<div class="container">
+  <div class="row no-gutters">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">新規登録</h2>
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
+      <div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+        <div class="mb-3">
+          <%= f.label :"ユーザー名" %>(半角英字のみ)<br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"メールアドレス" %><br>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"会員タイプ選択" %><br>
+          <%= f.radio_button :is_general, true %>
+          <%= f.label :is_general_true, "一般会員" %>
+          <%= f.radio_button :is_general, false %>
+          <%= f.label :is_general_false, "開催者会員" %>
+        </div>
+        <div class="m-3">
+          <%= f.label :"パスワード" %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <div class="m-3">
+          <%= f.label :"パスワード（確認用）" %><br>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= f.submit "新規登録", class: "btn btn-outline-success" %>
+        </div>
+        <% end %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :"ユーザー名" %><br>
-    <%= f.text_field :name %>
+      <div class="d-flex justify-content-end">
+        <%= render "public/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :"メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :"会員情報選択" %><br />
-    <%= f.radio_button :is_general, true %>
-    <%= f.label :is_general_true, "一般会員" %>
-    <%= f.radio_button :is_general, false %>
-    <%= f.label :is_general_false, "開催者会員" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :"パスワード（確認用）" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

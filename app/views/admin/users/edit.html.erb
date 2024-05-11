@@ -1,21 +1,51 @@
-<h1>プロフィール編集</h1>
-<%= form_with model: @user, url: admin_user_path(@user.id), local:true do |f| %>
-  <%= f.label :"ユーザー名" %>(半角英字)
-  <%= f.text_field :name %>
-  <%= f.label :"メールアドレス" %>
-  <%= f.text_field :email %>
-  <%= f.label :"アイコン画像" %>
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>  
-  <%= f.radio_button :is_general, true %>
-  <%= f.label :is_general_true, "一般" %>
-  <%= f.radio_button :is_general, false %>
-  <%= f.label :is_general_false, "開催者" %>
-  <p>アカウント停止</p>
-  <%= f.radio_button :is_active, true %>
-  <%= f.label :is_active_true, "有効" %>
-  <%= f.radio_button :is_active, false %>
-  <%= f.label :is_active_false, "停止" %>
-  <%= f.submit "変更を保存" %>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
-<%= link_to "退会", admin_user_path(@user.id), method: :delete, "data-confirm" => "本当に退会させますか？" %>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">プロフィール編集</h2>
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      <%= form_with model: @user, url: admin_user_path(@user.id), local:true do |f| %>
+        <div class="mb-3">
+          <%= f.label :"ユーザー名" %>(半角英字)<br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"メールアドレス" %><br>
+          <%= f.text_field :email %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"アイコン画像" %><br>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>  
+        </div>
+        <div class="mb-3">
+          <%= f.label :"会員タイプ選択" %><br>
+          <%= f.radio_button :is_general, true %>
+          <%= f.label :is_general_true, "一般" %>
+          <%= f.radio_button :is_general, false %>
+          <%= f.label :is_general_false, "開催者" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"アカウント状況" %><br>
+          <%= f.radio_button :is_active, true %>
+          <%= f.label :is_active_true, "有効" %>
+          <%= f.radio_button :is_active, false %>
+          <%= f.label :is_active_false, "停止" %>
+        </div>
+        <div class="d-flex justify-content-end mb-3">
+          <div class="m-2"><%= f.submit "変更を保存",  class: "btn btn-outline-success" %></div>
+          <div class="m-2"><%= link_to "戻る", admin_user_path(@user.id), class: "btn btn-outline-secondary" %></div>
+        </div>  
+      <% end %>
+      <div class="d-flex justify-content-end mb-3">
+        <%= link_to "退会", admin_user_path(@user.id), class: "btn btn-outline-danger", method: :delete, "data-confirm" => "本当に退会させますか？" %>
+      </div>
+    </div>
+  </div>
+</div>  

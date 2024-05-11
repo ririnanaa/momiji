@@ -1,46 +1,95 @@
-<% if user_signed_in? %>
-<h5>新規投稿</h5>
-<%= link_to "新規投稿", new_post_path %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報</h2>
+    <h5 class="m-3 text-secondary">投稿一覧</h5>
+    <div class="col-md-3"></div>
 
-<h1>投稿一覧</h1>
-<% @posts.each do |post| %>
-<% if post.user.is_active %>
-<% if post.user %>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_post_image(200,200) %>
+    <div class="col-md-9 mx-auto">
+    <% @posts.each do |post| %>
+      <% if post.user.is_active %>
+        <% if post.user %>
+          <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
+            <div class="row g-0">
+              <div class="col-lg-4">
+                <% if admin_signed_in? %>
+                  <%= link_to admin_post_path(post.id) do %>
+                    <%= image_tag post.get_post_image(210,297) %>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_path(post.id) do %>
+                    <%= image_tag post.get_post_image(210,297) %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-lg-8">
+                <div class="card-body">
+                  <h5 class="card-title">
+                  <!-- 展覧会名 -->
+                  <% if admin_signed_in? %>
+                    <%= link_to post.name, admin_post_path(post.id), class: "text-dark" %>
+                  <% else %>
+                    <%= link_to post.name, post_path(post.id), class: "text-dark" %>
+                  <% end %>
+                  </h5>
+                  <p class="card-text">
+                    <div class="d-flex">
+                      <div class="m-2 text-secondary">会期</div>
+                      <div class="m-2"><%= post.day %></div>
+                    </div>
+                    <div class="d-flex">
+                      <div class="m-2 text-secondary">会場</div>
+                      <div class="m-2"><%= post.place %></div>
+                    </div>
+                    <div class="d-flex">
+                      <div class="m-2 text-secondary">ジャンル</div>
+                      <div class="m-2">
+                        <% post.genres.each do |genre| %>
+                          <%= genre.name %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div class="m-2 text-secondary">カテゴリー</div>
+                      <div class="m-2">
+                        <% post.categories.each do |category| %>
+                          <%= category.name %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div class="m-2 text-secondary">投稿者</div>
+                      <div class="m-2">
+                        <% if admin_signed_in? %>
+                          <%= link_to post.user.name, admin_user_path(post.user.id), class: "text-dark" %>
+                        <% else %>
+                          <%= link_to post.user.name, "/#{post.user.name}", class: "text-dark" %>
+                        <% end %>
+                      </div>
+                      <div class="m-2 text-dark">
+                        <% if post.user.is_general %>
+                          （一般）
+                        <% else %>
+                          （開催者）
+                        <% end %>
+                      </div>
+                    </div>
+                  </p>
+                  <div class="d-flex justify-content-end">
+                  <% if admin_signed_in? %>
+                    <%= link_to "詳細を見る", admin_post_path(post.id), class: "btn btn-outline-info" %>
+                  <% else %>
+                    <%= link_to "詳細を見る", post_path(post.id), class: "btn btn-outline-info"  %>
+                  <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-    <h5>展覧会名</h5>
-    <%= link_to post_path(post.id) do %>
-      <%= post.name %>
-    <% end %>
-    <h5>開催日時</h5>
-    <%= post.daytime %>
-    <h5>会場</h5>
-    <%= post.place %>
-    <h5>会場住所</h5>
-    <%= post.address %>
-    <h5>説明</h5>
-    <%= post.body %>
-    <h5>ジャンル</h5>
-    <% post.genres.each do |genre| %>
-      <%= genre.name %>
-    <% end %>
-    <h5>カテゴリー</h5>
-     <% post.categories.each do |category| %>
-      <%= category.name %>
-    <% end %>
-    <h5>投稿者</h5>
-    <%= link_to "/#{post.user.name}" do %>
-      <%= post.user.name %>
-    <% end %>
-    <% if post.user.is_general %>
-      <p>一般</p>
-    <% else %>
-      <p>開催者</p>
-    <% end %>
+    <%= paginate @posts %>
+    </div>
+    
   </div>
-  <% end %>
-  <% end %>
-<% end %>
+</div>

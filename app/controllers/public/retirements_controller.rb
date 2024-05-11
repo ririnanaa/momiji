@@ -9,7 +9,7 @@ class Public::RetirementsController < ApplicationController
   def destroy
     @user.destroy
     redirect_to root_path
-    flash[:notice] = "退会が完了しました"
+    flash[:success] = "退会が完了しました"
   end
   
    private
@@ -21,7 +21,7 @@ class Public::RetirementsController < ApplicationController
   def ensure_normal_user
     if @user.email == 'guest@example.com'
       redirect_to root_path
-      flash[:alert] = 'ゲストユーザーは退会できません。'
+      flash[:warning] = 'ゲストユーザーは退会できません。'
     end
   end
 end

@@ -1,37 +1,8 @@
-<h1>投稿詳細画面</h1>
-
-<div> 
-  <%= image_tag @post.get_post_image(200,200) %>
-  <h5>展覧会名</h5>
-  <%= @post.name %> 
-  <h5>開催日時</h5>
-  <%= @post.daytime %>
-  <h5>会場名</h5>
-  <%= @post.place %>
-  <h5>会場住所</h5>
-  <%= @post.address %>
-  <h5>説明</h5>
-  <%= @post.body %>
-  <h5>ジャンル</h5>
-  <% @post.genres.each do |genre| %>
-    <%= genre.name %>
-  <% end %>
-  <h5>カテゴリー</h5>
-  <% @post.categories.each do |category| %>
-    <%= category.name %>
-  <% end %> 
-  <h5>投稿者</h5>
-  <%= link_to "/#{@post.user.name}" do %>
-    <%= @post.user.name %>
-  <% end %>  
-  <% if @post.user.is_general %>
-    <p>一般</p>
-  <% else %>  
-    <p>開催者</p>
-  <% end %>  
-  
-  <% if @post.user == current_user %> 
-    <%= link_to "編集", edit_post_path(@post.id) %>
-    <%= link_to "削除",  post_path(@post.id),  method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>  
-</div>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報詳細</h2>
+     <!-- 投稿詳細 -->
+     <%= render 'post', post: @post %>
+    
+  </div>
+</div>  

@@ -5,20 +5,19 @@ class Public::UsersController < ApplicationController
   before_action :ensure_normal_user, only: [:update]
   
   def show
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page])
   end
-  
 
   def edit
   end
   
   def update
     if @user.update(user_params)
+      flash[:success] = "変更が保存されました"
       redirect_to "/#{@user.name}"
-      flash[:notice] = "変更が保存されました"
     else
+      flash.now[:danger] = "変更に失敗しました"
       render :edit
-      flash.now[:alert] = "変更に失敗しました"
     end
   end
   
@@ -41,8 +40,8 @@ class Public::UsersController < ApplicationController
  
   def ensure_normal_user
     if @user.email == 'guest@example.com'
+      flash[:warning] = 'ゲストユーザーは更新できません。'
       redirect_to root_path
-      flash[:alert] = 'ゲストユーザーは更新できません。'
     end
   end
 end

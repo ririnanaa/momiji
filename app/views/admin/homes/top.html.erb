@@ -1,23 +1,39 @@
-<h1>管理者TOPページ</h1>
-
-<h4>ユーザー一覧</h4>
-<% @users.each do |user| %>
-  <p>ユーザー名：　</p>
-  <%= link_to admin_user_path(user.id) do %>
-  <%= user.name %>
-  <% end %>
-  <p>メールアドレス：　<%= user.email %></p>
-  <p>会員情報</p>
-  <% if user.is_general %>
-    <p>一般</p>
-  <% else %>  
-    <p>開催者</p>
-  <% end %> 
-  <p>ステータス</p>
-  <% if user.is_active %>
-    <p>有効</p>
-  <% else %>  
-    <p>退会</p>
-  <% end %>  
-  
-<% end %>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">ユーザー</h2>
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>会員タイプ</th>
+            <th>アカウント状況</th>
+          </tr>  
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, admin_user_path(user.id) %></td>
+            <td>
+              <% if user.is_general %>
+                <p>一般</p>
+              <% else %>  
+                <p>開催者</p>
+              <% end %> 
+            </td>
+            <td>
+              <% if user.is_active %>
+                <p class="text-success">有効</p>
+              <% else %>  
+                <p class="text-muted">停止</p>
+              <% end %>  
+            </td>  
+          </tr>
+          <% end %>
+        </tbody>
+      </table>  
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>  
