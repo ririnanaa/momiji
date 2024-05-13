@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2024_05_06_050918) do
   end
 
   create_table "post_categories", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "category_id", null: false
+    t.integer "post_id"
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_post_categories_on_category_id"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2024_05_06_050918) do
   end
 
   create_table "post_genres", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "genre_id", null: false
+    t.integer "post_id"
+    t.integer "genre_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_post_genres_on_genre_id"
