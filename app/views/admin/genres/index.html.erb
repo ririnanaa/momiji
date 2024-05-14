@@ -2,24 +2,33 @@
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">ジャンル作成・一覧</h2>
     <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      
+      <% if @genre.errors.any? %>
+        <%= @genre.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
-    <!--ジャンル新規登録 -->
-    <%= form_with model: @genre, url: admin_genres_path, method: :post, local:true do |f| %>
-      <div class="d-flex">
-        <div class="m-2"><%= f.text_field :name, placeholder: "江戸時代" %></div>
-        <div class="m-2"><%= f.submit '登録', class: "btn btn-outline-success btn-lg" %></div>
-      </div>
-    <% end %>
+      <!--ジャンル新規登録 -->
+      <%= form_with model: @genre, url: admin_genres_path, method: :post, local:true do |f| %>
+        <div class="d-flex">
+          <div class="m-2"><%= f.text_field :name, placeholder: "江戸時代" %></div>
+          <div class="m-2"><%= f.submit '登録', class: "btn btn-outline-success btn-lg" %></div>
+        </div>
+      <% end %>
 
-    <!--ジャンル一覧 -->
-    <h6 class="pt-4" style="color: #3a5b52;">ジャンル一覧</h6>
-    <% @genres.each do |genre| %>
-      <div class="d-flex">
-        <div class="m-2"><%= genre.name %></div>
-        <div class="m-2"><%= link_to '編集', edit_admin_genre_path(genre.id), class: "btn btn-outline-primary" %></div>
-        <div class="m-2"><%= link_to '削除', admin_genre_path(genre.id), class: "btn btn-outline-danger", method: :delete, "data-confirm" => "本当に削除しますか？"  %></div>
-      </div>
-    <% end %>
+      <!--ジャンル一覧 -->
+      <h6 class="pt-4" style="color: #3a5b52;">ジャンル一覧</h6>
+      <% @genres.each do |genre| %>
+        <div class="d-flex">
+          <div class="m-2"><%= genre.name %></div>
+          <div class="m-2"><%= link_to '編集', edit_admin_genre_path(genre.id), class: "btn btn-outline-primary" %></div>
+          <div class="m-2"><%= link_to '削除', admin_genre_path(genre.id), class: "btn btn-outline-danger", method: :delete, "data-confirm" => "本当に削除しますか？"  %></div>
+        </div>
+      <% end %>
  
     </div>
   </div>

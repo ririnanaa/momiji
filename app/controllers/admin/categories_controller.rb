@@ -14,6 +14,7 @@ class Admin::CategoriesController < ApplicationController
       redirect_to admin_categories_path
     else
       flash.now[:danger] = "登録に失敗しました"
+      @categories = Category.all
       render :index
     end
   end

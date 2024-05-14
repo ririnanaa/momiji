@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
    before_action :authenticate_user!, except: [:index, :show]
    before_action :set_post, only: [:show, :edit, :update]
+   before_action :is_matching_login_user, only: [:edit, :update]
    
   def new
     @post = Post.new
@@ -28,8 +29,8 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     if post.destroy
-      flash[:notice] = "削除しました"
-      redirect_to posts_path
+      flash[:success] = "削除しました"
+      redirect_to "/#{current_user.name}"
     else
       render :show
     end
@@ -52,6 +53,13 @@ class Public::PostsController < ApplicationController
   
   def set_post
     @post = Post.find(params[:id])
+  end
+  
+  def is_matching_login_user
+    post = Post.find(params[:id])
+    unless post.user == current_user.id
+      redirect_to posts_path
+    end
   end
   
   def post_params

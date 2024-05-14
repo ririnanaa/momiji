@@ -5,7 +5,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_normal_user, only: [:update]
   
   def show
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.page(params[:page]).order(created_at: :desc)
   end
 
   def edit

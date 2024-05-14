@@ -30,16 +30,16 @@ class Public::SessionsController < Devise::SessionsController
    def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path
+    redirect_to  "/#{current_user.name}"
     flash[:success] = "ゲストユーザーとしてログインしました。"
    end
 
   def after_sign_in_path_for(resource)
-    root_path
+    "/#{current_user.name}"
   end
 
   def after_sign_out_path_for(resource)
-    new_user_session_path
+    root_path
   end
 
   private

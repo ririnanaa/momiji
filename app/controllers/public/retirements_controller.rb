@@ -8,7 +8,7 @@ class Public::RetirementsController < ApplicationController
   
   def destroy
     @user.destroy
-    redirect_to root_path
+    redirect_to new_user_registration_path
     flash[:success] = "退会が完了しました"
   end
   

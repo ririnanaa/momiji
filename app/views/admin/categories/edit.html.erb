@@ -2,6 +2,16 @@
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">カテゴリー編集</h2>
     <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+     
+      <% if @category.errors.any? %>
+        <%= @category.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
       <%= form_with model: @category, url: admin_category_path(@category.id), local:true do |f| %>
         <div class="d-flex">
           <div class="m-2"><%= f.text_field :name %></div>

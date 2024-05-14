@@ -33,8 +33,12 @@ class Admin::GenresController < ApplicationController
 
   def destroy
     genre = Genre.find(params[:id])
-    genre.destroy
-    redirect_to admin_genres_path
+    if genre.destroy
+      flash[:success] = "削除に成功しました"
+      redirect_to admin_genres_path
+    else
+      render :index
+    end
   end
 
   private
