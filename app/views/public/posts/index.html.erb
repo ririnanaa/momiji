@@ -2,9 +2,49 @@
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報</h2>
     <h5 class="m-3 text-secondary">投稿一覧</h5>
-    <div class="col-md-3"></div>
+    
+    <!-- ジャンル・カテゴリー検索 -->
+    <div class="col-md-3 mb-3">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              ジャンル絞り込み検索
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+            <% @genres.each do |genre| %>
+		  	      <li><%= link_to genre.name, posts_path(genre_id: genre.id), class: 'text-dark' %></li>
+	  	      <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              カテゴリー絞り込み検索
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+            <% @categories.each do |category| %>
+	  	        <li><%= link_to category.name, posts_path(category_id: category.id), class: 'text-dark' %></li>
+	  	      <% end %>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="col-md-9 mx-auto">
+    <!-- 投稿一覧 -->
+    <div class="col-md-8 offset-md-1 mx-auto">
+      <% if params[:genre_id] %>
+			<h5 class="m-2 text-secondary">ジャンル＜<%= @genre.name %>＞</h5>
+		<% elsif params[:category_id] %>
+		<h5 class="m-2 text-secondary">カテゴリー＜<%= @category.name %>＞</h5>
+		<% end %>
+		
     <% @posts.each do |post| %>
       <% if post.user.is_active %>
         <% if post.user %>
