@@ -25,4 +25,20 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { in: 1..750 }
   validates :genre_id, acceptance: true
   validates :category_id, acceptance: true
+  
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("name LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("name LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
+  
 end
