@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      <h3 class="pl-3 pt-3" style="color: #3a5b52;">"<%= @word %>"の検索結果</h3>
+       
+      <table class="table">
+        <% if @range == "User" %>
+          <thead>
+            <tr>
+              <th></th>
+              <th>ユーザー</th>
+            </tr>  
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <% if user.is_active %>
+                <tr>
+                  <td><%= image_tag user.get_profile_image(100,100) %></td>
+                  <td><%= link_to user.name, "/#{user.name}", class: "text-dark" %></td>
+                </tr>
+              <% end %>  
+            <% end %>
+          </tbody>
+        <% else %>
+          <thead>
+            <tr>
+              <th></th>
+              <th>展覧会</th>
+              <th>ユーザー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <% if post.user.is_active %>
+                <tr>
+                  <td><%= image_tag post.get_post_image(100,142) %></td>
+                  <td><%= link_to post.name, post_path(post.id), class: "text-dark" %></td>
+                  <td><%= link_to post.user.name, "/#{post.user.name}", class: "text-dark" %></td>
+                </tr>
+              <% end %>  
+            <% end %>  
+          </tbody>
+        <% end %>
+      </table>
+      
+    </div>  
+  </div>
+</div>  

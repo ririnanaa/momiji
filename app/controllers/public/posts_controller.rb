@@ -20,7 +20,18 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page]).order(created_at: :desc)
+    @genres = Genre.all
+    @categories = Category.all
+    if params[:genre_id]
+      @genre = @genres.find(params[:genre_id])
+      all_posts = @genre.posts
+    elsif params[:category_id]
+      @category = @categories.find(params[:category_id])
+      all_posts = @category.posts
+    else
+      all_posts = Post.all
+    end
+    @posts = all_posts.page(params[:page]).order(created_at: :desc)
   end
   
   def show

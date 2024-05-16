@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create, :edit, :update, :destroy]
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :posts, only: [:show, :destroy]
+    get 'search' => 'searches#search'
   end
   
      # 会員側のルーティング設定
@@ -26,12 +27,11 @@ Rails.application.routes.draw do
     root to: 'homes#top'  
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :retirements, only: [:new, :destroy]
-
+    
+    get 'search' => 'searches#search'
     get '/:name' => 'users#show'
     get '/:name/edit' => 'users#edit'
     patch '/:name' => 'users#update'
-    
-    
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
