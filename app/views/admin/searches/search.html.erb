@@ -14,7 +14,11 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= image_tag user.get_profile_image(100,100) %></td>
+              <td>
+                <%= link_to admin_user_path(user.id) do %>
+                  <%= image_tag user.get_profile_image(100,100) %>
+                <% end %>  
+              </td>
               <td><%= link_to user.name, admin_user_path(user.id), class: "text-dark" %></td>
             </tr>
           <% end %>
@@ -31,8 +35,12 @@
         <tbody>
           <% @posts.each do |post| %>
             <tr>
-              <td><%= image_tag post.get_post_image(100,142) %></td>
-              <td><%= link_to post.name, post_path(post.id), class: "text-dark" %></td>
+              <td>
+                <%= link_to admin_post_path(post.id) do %>
+                  <%= image_tag post.get_post_image(100,142) %>
+                <% end %>  
+              </td>
+              <td><%= link_to post.name, admin_post_path(post.id), class: "text-dark" %></td>
               <td><%= link_to post.user.name, admin_user_path(post.user.id), class: "text-dark" %></td>
             </tr>
           <% end %>  

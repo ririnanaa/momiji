@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :categories, only: [:index, :create, :edit, :update, :destroy]
     resources :users, only: [:show, :edit, :update, :destroy]
-    resources :posts, only: [:show, :destroy]
+    resources :posts, only: [:show, :destroy] do
+      resources :reviews, only: [:index, :destroy]
+    end
+    
     get 'search' => 'searches#search'
   end
   
@@ -25,7 +28,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: 'homes#top'  
-    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
+    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
+      resources :reviews, only: [:new, :index, :create, :edit, :update, :destroy]
+    end 
     resources :retirements, only: [:new, :destroy]
     
     get 'search' => 'searches#search'

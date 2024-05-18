@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
 
   has_many :posts, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :introduction, length: { maximum: 300 }
@@ -37,7 +38,6 @@ class User < ApplicationRecord
       @user = User.where("name LIKE?","%#{word}")
     else search == "partial_match"
       @user = User.where("name LIKE?","%#{word}%")
-   
     end
   end
 
