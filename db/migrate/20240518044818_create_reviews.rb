@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       
       t.integer :user_id, null: false
       t.integer :post_id, null: false
-      t.float :rate, null: false
+      t.float :rate
       t.integer :day, null: false
       t.integer :time, null: false
       t.integer :congestion, null: false

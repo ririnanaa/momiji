@@ -1,2 +1,39 @@
-<h1>Public::Reviews#new</h1>
-<p>Find me in app/views/public/reviews/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h2 class="pl-3 pt-3" style="color: #3a5b52;">レビュー新規投稿</h2>
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+       <% if @review.errors.any? %>
+        <%= @review.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
+      <%= form_with model: [@post, @review], url: post_reviews_path(@post), local: true do |f| %>
+        <div class="mb-2">訪問日<br>
+          <%= f.select :day, Review.days.keys.map { |k| [I18n.t("enums.review.day.#{k}"), k] } %>
+        </div>
+        <div class="mb-2">時間帯<br>
+          <%= f.select :time, Review.times.keys.map { |k| [I18n.t("enums.review.time.#{k}"), k] } %>
+        </div>  
+        <div class="mb-2">混雑状況<br>
+          <%= f.select :congestion, Review.congestions.keys.map { |k| [I18n.t("enums.review.congestion.#{k}"), k] } %>
+        </div>  
+        <div class="mb-2">タイトル<br>
+          <%= f.text_field :title, size: "30x5", placeholder: "1文字以上50文字以内" %>
+        </div>  
+        <div class="mb-2">コメント<br>
+          <%= f.text_area :body, size: "30x5", placeholder: "10文字以上500文字以内" %>
+        </div>  
+        <div class="d-flex justify-content-end mb-4">
+          <%= f.submit "保存", class: "btn btn-outline-success btn-lg" %>
+        </div>  
+        <div class="d-flex justify-content-end mb-4">
+          <%= link_to "展覧会詳細へ戻る", post_path(@post.id), class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>  
+    </div>
+  </div>
+</div>

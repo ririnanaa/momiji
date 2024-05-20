@@ -50,7 +50,6 @@
 		
       <% @posts.each do |post| %>
       <% if post.user.is_active %>
-        <% if post.user %>
           <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
             <div class="row g-0">
               <div class="col-lg-4">
@@ -129,7 +128,6 @@
             </div>
           </div>
         <% end %>
-      <% end %>
       <% end %>
     <%= paginate @posts, theme: 'bootstrap-5' %>
     </div>

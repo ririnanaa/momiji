@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2024_05_18_044818) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
-    t.float "rate", null: false
+    t.float "rate"
     t.integer "day", null: false
     t.integer "time", null: false
     t.integer "congestion", null: false

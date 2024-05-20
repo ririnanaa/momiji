@@ -3,6 +3,17 @@
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報詳細</h2>
     <%= render 'public/posts/post', post: @post %>
+    
+     <!-- レビュー -->
+    <div class="d-flex mt-5">
+      <h3 class="pl-3 pt-3" style="color: #3a5b52;">レビュー</h3>
+    </div>   
+    件数：全<%= @post.reviews.count %>件
+    <%= render 'public/reviews/review', post: @post %>
+    <div class="d-flex justify-content-end">
+        <%= link_to "全て見る", admin_post_reviews_path(@post.id), class: "btn btn-outline-info" %>
+    </div>
+   
   </div>
 </div> 
 

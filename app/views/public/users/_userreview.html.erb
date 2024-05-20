@@ -1,0 +1,64 @@
+<!-- ユーザー毎のレビュー -->
+<h3 class="pl-3 pt-3" style="color: #3a5b52;">レビュー</h3>
+<% reviews.each do |review| %>
+  <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
+    <div class="card-body">
+      <div class="h5 pb-2 mb-4 border-bottom">
+        <% if admin_signed_in? %>
+          <%= link_to review.post.name, admin_post_path(review.post.id), class: "text-dark" %>
+        <% else %>
+          <%= link_to review.post.name, post_path(review.post.id), class: "text-dark" %>
+        <% end %>
+      </div>
+      <h5 class="card-title mb-3"><%= review.title %></h5>
+      <div class="card-subtitle d-flex m-2">
+        <%= image_tag review.user.get_profile_image(50,50) %>
+        <h6 class="p-3">
+          <% if admin_signed_in? %>
+            <%= link_to review.user.name, admin_user_path(user), class: "text-dark" %>
+          <% else %>
+            <%= link_to review.user.name, "/#{user.name}", class: "text-dark" %>
+          <% end %>
+        </h6>
+        <div class="m-2 text-dark">
+          <% if review.user.is_general %>
+            （一般）
+          <% else %>
+            （開催者）
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="m-2 text-secondary">投稿日</div>
+        <div class="m-2"><%= review.created_at.strftime('%Y/%m/%d') %></div>
+      </div>
+      <p class="card-text">
+        <div class="d-flex">
+          <div class="m-2 text-secondary">訪問日</div>
+          <div class="m-2"><%= review.day_i18n %></div>
+        </div>
+        <div class="d-flex">
+          <div class="m-2 text-secondary">時間帯</div>
+          <div class="m-2"><%= review.time_i18n %></div>
+        </div>
+        <div class="d-flex">
+          <div class="m-2 text-secondary">混雑状況</div>
+          <div class="m-2"><%= review.congestion_i18n %></div>
+        </div>
+        <div class="m-2">
+          <div class="text-secondary">コメント</div>
+          <div class="mt-2"> <%= review.body %></div>
+        </div>
+      </p>
+      <div class="d-flex justify-content-end">
+        <% if review.user == current_user %>
+          <div class="p-2"><%= link_to "編集", edit_post_review_path(review.post, review), class: "btn btn-outline-primary" %></div>
+          <div class="p-2"><%= link_to "削除", post_review_path(review.post, review), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-outline-danger" %></div>
+        <% end %>
+        <% if admin_signed_in? %>
+          <%= link_to "削除", admin_post_review_path(review.post, review), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-outline-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
