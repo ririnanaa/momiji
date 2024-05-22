@@ -31,10 +31,12 @@ class Public::PostsController < ApplicationController
     else
       all_posts = Post.all
     end
-    @posts = all_posts.page(params[:page]).order(created_at: :desc)
+    @posts = all_posts.page(params[:page]).order(created_at: :desc).joins(:user).where(users: { is_active: true })
   end
   
   def show
+    @reviews = @post.reviews.includes(:user).order(created_at: :desc).joins(:user).where(users: { is_active: true })
+    @reviews_latest5 = @reviews.first(5)
   end
   
   def destroy

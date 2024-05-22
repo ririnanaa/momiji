@@ -9,5 +9,5 @@ class Review < ApplicationRecord
   
   validates :title, presence: true, length: { in: 1..50 }
   validates :body, presence: true, length: { in: 10..500 }
-  
+  validates :rate, presence: true
 end

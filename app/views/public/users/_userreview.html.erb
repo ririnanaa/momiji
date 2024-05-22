@@ -1,6 +1,7 @@
 <!-- ユーザー毎のレビュー -->
 <h3 class="pl-3 pt-3" style="color: #3a5b52;">レビュー</h3>
 <% reviews.each do |review| %>
+<% if review.post.user.is_active %>
   <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
     <div class="card-body">
       <div class="h5 pb-2 mb-4 border-bottom">
@@ -70,3 +71,7 @@
     </div>
   </div>
 <% end %>
+<% end %>
+<div class="d-flex justify-content-center">
+  <%= paginate reviews, theme: 'bootstrap-5' %>
+</div>

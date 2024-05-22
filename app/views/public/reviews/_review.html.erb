@@ -1,6 +1,5 @@
 <!-- レビュー一覧 -->
-<% post.reviews.each do |review| %>
-<% if review.user.is_active %>
+<% reviews.each do |review| %>
   <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
     <div class="card-body">
       <h5 class="card-title mb-3"><%= review.title %></h5>
@@ -78,6 +77,5 @@
       </div>
     </div>  
   </div>
-  <% end %>
 <% end %>
 

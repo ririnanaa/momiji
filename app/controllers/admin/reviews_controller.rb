@@ -3,6 +3,7 @@ class Admin::ReviewsController < ApplicationController
    
   def index
     @post = Post.find(params[:post_id])
+    @reviews = @post.reviews.includes(:user).order(created_at: :desc).page(params[:page])
   end
   
   def destroy

@@ -1,26 +1,27 @@
 <div class="container">
   <div class="row">
-    <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報詳細</h2>
-    <!-- 投稿詳細 -->
-    <%= render 'post', post: @post %>
+    <% if @post.user.is_active %>
+      <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報詳細</h2>
+      <!-- 投稿詳細 -->
+      <%= render 'post', post: @post %>
     
-    <!-- レビュー -->
-    <% if user_signed_in? %>
-    <div class="d-flex mt-5">
-      <h3 class="pl-3 pt-3" style="color: #3a5b52;">レビュー</h3>
-      <%= link_to "レビューする", new_post_review_path(@post.id), class: "btn btn-outline-info m-3" %>
-    </div>   
-    件数：全<%= @post.reviews.count %>件
-    <%= render 'public/reviews/review', post: @post %>
-    <div class="d-flex justify-content-end">
-        <%= link_to "全て見る", post_reviews_path(@post.id), class: "btn btn-outline-info" %>
-    </div>
+      <!-- レビュー -->
+      <% if user_signed_in? %>
+        <div class="d-flex mt-5">
+          <h3 class="pl-3 pt-3" style="color: #3a5b52;">レビュー</h3>
+          <%= link_to "レビューする", new_post_review_path(@post.id), class: "btn btn-outline-info m-3" %>
+        </div>  
+        件数：全<%= @reviews.count %>件
+        <%= render 'public/reviews/review', reviews: @reviews_latest5 %>
+        <div class="d-flex justify-content-end">
+          <%= link_to "全て見る", post_reviews_path(@post.id), class: "btn btn-outline-info" %>
+        </div>
+      <% else %>
+        <h3 class="mt-5" style="color: #3a5b52;">レビュー</h3><br>
+        <p>レビューをご覧になるには、ユーザー登録が必要です。</p>
+      <% end %>
     <% else %>
-     
-      <h3 class="mt-5" style="color: #3a5b52;">レビュー</h3><br>
-    <p>レビューをご覧になるには、ユーザー登録が必要です。</p>
-
-     <% end %>   
-     
+      <div class="d-flex justify-content-center m-3">この投稿のユーザーのアカウントが停止中のため、閲覧できません。</div>
+    <% end %>
   </div>
 </div>  

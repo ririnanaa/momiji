@@ -1,14 +1,13 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [:new, :create, :index, :edit, :update]
   before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
-    @post = Post.find(params[:post_id])
     @review = Review.new
   end
   
   def create
-    @post = Post.find(params[:post_id])
     @review = current_user.reviews.new(review_params)
     @review.post_id = @post.id
     if @review.save
@@ -21,16 +20,14 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-    @post = Post.find(params[:post_id])
+    @reviews = @post.reviews.includes(:user).order(created_at: :desc).joins(:user).where(users: { is_active: true }).page(params[:page])
   end
 
   def edit
-    @post = Post.find(params[:post_id])
     @review = Review.find(params[:id])
   end
   
   def update
-    @post = Post.find(params[:post_id])
     @review = Review.find(params[:id])
     if @review.update(review_params)
       flash[:success] = "変更を保存しました"
@@ -49,6 +46,10 @@ class Public::ReviewsController < ApplicationController
   end
   
   private
+  
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
   
   def is_matching_login_user
     review = Review.find(params[:id])
