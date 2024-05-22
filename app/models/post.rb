@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :genres, through: :post_genres, dependent: :destroy
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   
   has_one_attached :post_image
   

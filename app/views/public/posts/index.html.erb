@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報</h2>
-    <h5 class="pb-3 text-secondary">（投稿一覧）</h5>
+    <h5 class="pb-3 text-secondary">（投稿一覧/新着順）</h5>
     
     <!-- ジャンル・カテゴリー検索 -->
     <div class="col-md-3 mb-3">
@@ -49,8 +49,6 @@
 	  	<% end %>
 		
       <% @posts.each do |post| %>
-      <% if post.user.is_active %>
-        <% if post.user %>
           <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
             <div class="row g-0">
               <div class="col-lg-4">
@@ -128,8 +126,6 @@
               </div>
             </div>
           </div>
-        <% end %>
-      <% end %>
       <% end %>
     <%= paginate @posts, theme: 'bootstrap-5' %>
     </div>

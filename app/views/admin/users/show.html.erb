@@ -6,9 +6,26 @@
       <%= render 'public/users/info', user: @user %>
     </div> 
 
-    <!-- ユーザー投稿一覧 -->
     <div class="col-md-8 offset-md-1">
-      <%= render 'public/users/userpost', {user: @user, posts: @posts} %>
+      <!-- タブ -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button class="nav-link active text-dark" data-bs-toggle="tab" data-bs-target="#tab1" type="button">投稿(展覧会)</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-dark" data-bs-toggle="tab" data-bs-target="#tab2" type="button">レビュー</button>
+        </li>
+      </ul>
+      <!-- ユーザー投稿一覧 -->
+      <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+          <%= render 'public/users/userpost', {user: @user, posts: @posts} %>
+        </div>
+        <!-- ユーザーのレビュー一覧 -->
+        <div id="tab2" class="tab-pane">
+          <%= render 'public/users/userreview', {user: @user, reviews: @reviews} %>
+        </div>
+      </div>
     </div>
     
   </div>  

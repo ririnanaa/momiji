@@ -1,6 +1,6 @@
 <!-- ユーザーの投稿一覧 -->
 
-<h2 class="pl-3 pt-3" style="color: #3a5b52;"><%= user.name %>さんの投稿一覧</h2>
+<h3 class="pl-3 pt-3" style="color: #3a5b52;"><%= user.name %>さんの投稿一覧</h3>
 <% posts.each do |post| %>
 <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
   <div class="row g-0">
@@ -63,5 +63,6 @@
   </div>
 </div>  
 <% end %>
-
-<%= paginate posts, theme: 'bootstrap-5' %>
+<div class="d-flex justify-content-center">
+  <%= paginate posts, theme: 'bootstrap-5' %>
+</div>

@@ -4,6 +4,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @posts = @user.posts.page(params[:page]).order(created_at: :desc)
+    @reviews = @user.reviews.page(params[:page]).order(created_at: :desc)
   end
   
   def edit

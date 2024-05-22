@@ -14,59 +14,59 @@
   
   <body class="d-flex flex-column vh-100" style="background-color: #f8f4e6;" data-turbolinks='false'>
  
-      <nav  class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm"  style="background-color: #e9e4d4;">
+      <nav  class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm"  style="background-color: #eb6101;">
         <div class="container-fluid">
         <a class="navbar-brand" href="/">
-            <i class="fa-brands fa-canadian-maple-leaf fa-2x" style="color: #c9171e;"></i>
+           <%= image_tag "logo-003.png" %>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'マイページ', "/#{current_user.name}", class: 'nav-link text-dark' %> 
+              <%= link_to 'マイページ', "/#{current_user.name}", class: 'nav-link text-light' %> 
             </li>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
+              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規投稿", new_post_path, class: 'nav-link text-dark' %>
+              <%= link_to "新規投稿", new_post_path, class: 'nav-link text-light' %>
             </li>  
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
             </li>  
       
             <% elsif admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
+              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ユーザー", admin_path, class: 'nav-link text-dark' %>
+              <%= link_to "ユーザー", admin_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ジャンル作成/一覧", admin_genres_path, class: 'nav-link text-dark' %>
+              <%= link_to "ジャンル作成/一覧", admin_genres_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "カテゴリー作成/一覧", admin_categories_path, class: 'nav-link text-dark' %>
+              <%= link_to "カテゴリー作成/一覧", admin_categories_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト",  destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to "ログアウト",  destroy_admin_session_path, method: :delete, class: 'nav-link text-light' %>
             </li>
         
             <% else %>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
+              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
+              <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'nav-link text-light' %>
             </li>  
             <% end %>  
           </ul>

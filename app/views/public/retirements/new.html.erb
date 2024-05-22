@@ -12,7 +12,7 @@
           <%= link_to "退会する", retirement_path(current_user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "本当に退会しますか？"} %>
         </div>
         <div class="m-4">
-          <%= link_to "戻る", "/#{current_user.name}", class: "btn btn-outline-secondary" %>
+          <%= link_to "編集画面へ戻る", "/#{current_user.name}/edit", class: "btn btn-outline-secondary" %>
         </div>
       </div>
     </div>

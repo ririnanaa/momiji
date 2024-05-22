@@ -3,6 +3,8 @@ class Admin::PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
   
   def show
+    @reviews = @post.reviews.includes(:user).order(created_at: :desc)
+    @reviews_latest5 = @reviews.first(5)
   end
   
   def destroy
