@@ -12,6 +12,27 @@
       <% end %>
       
       <%= form_with model: [@post, @review], url: post_review_path(@review.post, @review), local: true do |f| %>
+        <div class="form-group mb-2" id="star">
+          <%= f.label :rate, '評価' %>
+          <%= f.hidden_field :rate, id: :review_rate, class: 'form-label' %>
+          <div id="post_raty_<%= @review.id %>"></div>
+        </div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#post_raty_<%= @review.id %>');
+            if (elem == null) return;
+  
+            elem.innerHTML = ""
+            let opt = {  
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              score: <%= @review.rate %>,
+              scoreName: 'review[rate]',
+            };
+            raty(elem, opt);
+          });
+        </script>
         <div class="mb-2">訪問日<br>
           <%= f.select :day, Review.days.keys.map { |k| [I18n.t("enums.review.day.#{k}"), k] } %>
         </div>

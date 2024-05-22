@@ -5,34 +5,42 @@
     <div class="card-body">
       <div class="h5 pb-2 mb-4 border-bottom">
         <% if admin_signed_in? %>
-          <%= link_to review.post.name, admin_post_path(review.post.id), class: "text-dark" %>
+          <%= link_to admin_post_path(review.post.id) do %>
+            <%= image_tag review.post.get_post_image(50,71) %>
+          <% end %>  
+          <%= link_to review.post.name, admin_post_path(review.post.id), class: "text-dark m-3" %>
         <% else %>
-          <%= link_to review.post.name, post_path(review.post.id), class: "text-dark" %>
+          <%= link_to post_path(review.post.id) do %>
+            <%= image_tag review.post.get_post_image(50,71) %>
+          <% end %>
+          <%= link_to review.post.name, post_path(review.post.id), class: "text-dark m-3" %>
         <% end %>
       </div>
       <h5 class="card-title mb-3"><%= review.title %></h5>
-      <div class="card-subtitle d-flex m-2">
-        <%= image_tag review.user.get_profile_image(50,50) %>
-        <h6 class="p-3">
-          <% if admin_signed_in? %>
-            <%= link_to review.user.name, admin_user_path(user), class: "text-dark" %>
-          <% else %>
-            <%= link_to review.user.name, "/#{user.name}", class: "text-dark" %>
-          <% end %>
-        </h6>
-        <div class="m-2 text-dark">
-          <% if review.user.is_general %>
-            （一般）
-          <% else %>
-            （開催者）
-          <% end %>
-        </div>
-      </div>
       <div class="d-flex">
         <div class="m-2 text-secondary">投稿日</div>
         <div class="m-2"><%= review.created_at.strftime('%Y/%m/%d') %></div>
       </div>
       <p class="card-text">
+        <div class="m-2">
+          <div id="star_<%= review.id %>"></div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#star_<%= review.id %>');
+              if (elem == null) return;
+  
+              elem.innerHTML = "";
+              let opt = {  
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                score: "<%= review.rate %>",
+                readOnly: true,
+              };
+              raty(elem, opt);
+            });
+          </script>
+        </div>
         <div class="d-flex">
           <div class="m-2 text-secondary">訪問日</div>
           <div class="m-2"><%= review.day_i18n %></div>
