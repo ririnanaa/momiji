@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 mx-2 mx-sm-auto">
+      <h3 class="pl-3 pt-3" style="color: #3a5b52;"><%= @user.name %>さんのお気に入り</h3>
+       
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>展覧会</th>
+            <th>ユーザー</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @like_posts.each do |post|%>
+            <% if post.user.is_active %>
+              <tr>
+                <td>
+                  <%= link_to post_path(post.id) do %>
+                    <%= image_tag post.get_post_image(100,142) %>
+                  <% end %>
+                </td>
+                <td><%= link_to post.name, post_path(post.id), class: "text-dark" %></td>
+                <td><%= link_to post.user.name, "/#{post.user.name}", class: "text-dark" %></td>
+              </tr>
+            <% end %>  
+          <% end %>  
+        </tbody>
+      </table>
+      
+    </div>  
+  </div>
+</div>  

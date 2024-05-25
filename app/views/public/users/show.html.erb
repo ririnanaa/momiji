@@ -8,6 +8,9 @@
         <% if @user == current_user %>
           <%= link_to "プロフィール編集", "/#{current_user.name}/edit", class: "btn btn-outline-primary" %>
         <% end %>
+        <div class="d-flex mt-3">
+        <%= link_to "お気に入り一覧", likes_user_path(@user), class: "btn btn-outline-info" %>
+        </div>
       </div>  
 
       <div class="col-md-8 offset-md-1 mx-auto">

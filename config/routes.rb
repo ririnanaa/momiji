@@ -29,12 +29,18 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'  
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
+      resource :likes, only: [:create, :destroy]
       resources :reviews, only: [:new, :index, :create, :edit, :update, :destroy]
     end 
     resources :retirements, only: [:new, :destroy]
+    resources :users, except: [:show, :edit, :update] do
+      member do
+        get :likes
+      end
+    end
     
     get 'search' => 'searches#search'
-    get '/:name' => 'users#show'
+    get '/:name' => 'users#show' 
     get '/:name/edit' => 'users#edit'
     patch '/:name' => 'users#update'
   end

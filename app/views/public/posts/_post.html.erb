@@ -1,6 +1,15 @@
 <!-- 投稿詳細 -->
 <div class="col-md-3 pt-5">
   <%= image_tag post.get_post_image(210,297) %>
+   <!-- お気に入り -->
+   <div class="d-flex m-3">
+   <p class="m-3">お気に入り</p>
+   <div class="m-3">
+     <div id="like_buttons_<%= post.id %>" >
+  <%= render 'public/likes/like', post: post %>
+  </div>
+  </div>
+  </div>
 </div>
 <div class="col-md-7 offset-md-2 mx-auto pt-5">
   <div class="m-2">

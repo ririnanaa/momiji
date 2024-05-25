@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :introduction, length: { maximum: 300 }

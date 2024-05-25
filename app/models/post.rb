@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   has_one_attached :post_image
   
@@ -14,6 +15,10 @@ class Post < ApplicationRecord
       post_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     post_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  def liked_by?(user)
+    likes.exists?(user_id: user.id)
   end
   
   validates :post_image, presence: true
