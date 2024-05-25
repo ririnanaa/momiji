@@ -2,7 +2,12 @@
 <% reviews.each do |review| %>
   <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
     <div class="card-body">
-      <h5 class="card-title mb-3"><%= review.title %></h5>
+      <div class="d-flex">
+        <h5 class="card-title m-3"><%= review.title %></h5>
+        <div id="favorite_buttons_<%= review.id %>" class="m-3">
+          <%= render 'public/favorites/favorite', review: review %>
+        </div>
+      </div>
       <div class="card-subtitle d-flex m-2">
         <%= image_tag review.user.get_profile_image(50,50) %>
         <h6 class="p-3">

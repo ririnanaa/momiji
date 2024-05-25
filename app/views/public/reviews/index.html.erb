@@ -1,7 +1,13 @@
 <div class="container">
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">＜<%= @post.name %>＞のレビュー</h2>
-    <div class="col-md-3"> <%= link_to "レビューする", new_post_review_path(@post.id), class: "btn btn-outline-info m-3" %></div>
+    <div class="col-md-3">
+      <div class="m-5">
+        <%= link_to new_post_review_path(@post.id), class: "text-info" do %>
+          <h5 class="text-info"><i class="fa-regular fa-comment"></i>レビューする</h5>
+        <% end %> 
+      </div>  
+    </div>
     <div class="col-md-9 mx-auto">
       <%= render 'review', reviews: @reviews %>
       <div class="d-flex justify-content-center">
