@@ -11,10 +11,10 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:success] = "登録に成功しました"
+      flash[:notice] = "登録に成功しました"
       redirect_to post_path(@post.id)
     else
-      flash.now[:danger] = "登録に失敗しました"
+      flash.now[:alert] = "登録に失敗しました"
       render "new"
     end
   end
@@ -42,7 +42,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     if post.destroy
-      flash[:success] = "削除しました"
+      flash[:notice] = "削除しました"
       redirect_to "/#{current_user.name}"
     else
       render :show
@@ -54,10 +54,10 @@ class Public::PostsController < ApplicationController
   
   def update
     if @post.update(post_params)
-      flash[:success] = "変更を保存しました"
+      flash[:notice] = "変更を保存しました"
       redirect_to post_path(@post.id)
     else
-      flash.now[:danger] = "登録に失敗しました"
+      flash.now[:alert] = "登録に失敗しました"
       render :edit
     end
   end

@@ -2,11 +2,13 @@
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">＜<%= @post.name %>＞のレビュー</h2>
     <div class="col-md-3">
+      <% if current_user.is_general %>
       <div class="m-5">
         <%= link_to new_post_review_path(@post.id), class: "text-info" do %>
           <h5 class="text-info"><i class="fa-regular fa-comment"></i>レビューする</h5>
         <% end %> 
-      </div>  
+      </div> 
+      <% end %>
     </div>
     <div class="col-md-9 mx-auto">
       <%= render 'review', reviews: @reviews %>

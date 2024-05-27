@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
  # 管理者用
-  devise_for :admin, skip: [:registrations], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
  
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   
      # 会員側のルーティング設定
-  devise_for :user, controllers: {
+  devise_for :user, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }

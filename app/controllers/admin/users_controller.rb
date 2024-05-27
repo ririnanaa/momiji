@@ -12,17 +12,17 @@ class Admin::UsersController < ApplicationController
   
   def update
     if @user.update(user_params)
-      flash[:success] = "変更が保存されました"
+      flash[:notice] = "変更が保存されました"
       redirect_to admin_user_path(@user.id)
     else
-      flash[:danger] = "変更に失敗しました"
+      flash[:alert] = "変更に失敗しました"
       render :edit
     end
   end
   
   def destroy
     if @user.destroy
-      flash[:success] = "退会処理に成功しました"
+      flash[:notice] = "退会処理に成功しました"
       redirect_to admin_path
     end
   end

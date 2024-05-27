@@ -29,10 +29,10 @@
               <%= link_to 'マイページ', "/#{current_user.name}", class: 'nav-link text-light' %> 
             </li>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
+              <%= link_to "展覧会情報", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to "新規投稿", new_post_path, class: 'nav-link text-light' %>
+              <%= link_to "新規投稿(展覧会)", new_post_path, class: 'nav-link text-light' %>
             </li>  
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
@@ -40,7 +40,7 @@
       
             <% elsif admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
+              <%= link_to "展覧会情報", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
               <%= link_to "ユーザー", admin_path, class: 'nav-link text-light' %>
@@ -57,7 +57,7 @@
         
             <% else %>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path, class: 'nav-link text-light' %>
+              <%= link_to "展覧会情報", posts_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
               <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
@@ -74,11 +74,13 @@
         </div>
       </nav>
     
-    <main class="m-3 pt-5">
-     <% flash.each do |key, value| %>
-       <p class="alert alert-<%= key %>">
-         <%= value %>
-       </p>
+      <main class="m-3 pt-5">
+      
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= bootstrap_alert(key) %>" role="alert">
+          <strong><%= value %></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
       
       <%= yield %>
