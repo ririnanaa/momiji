@@ -11,10 +11,10 @@ class Public::ReviewsController < ApplicationController
     @review = current_user.reviews.new(review_params)
     @review.post_id = @post.id
     if @review.save
-      flash[:success] = "投稿に成功しました"
+      flash[:notice] = "投稿に成功しました"
       redirect_to post_path(@post)
     else
-      flash.now[:danger] = "投稿に失敗しました"
+      flash.now[:alert] = "投稿に失敗しました"
       render "new"
     end
   end
@@ -30,10 +30,10 @@ class Public::ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      flash[:success] = "変更を保存しました"
+      flash[:notice] = "変更を保存しました"
       redirect_to post_reviews_path(@post)
     else
-      flash.now[:danger] = "保存に失敗しました"
+      flash.now[:alert] = "保存に失敗しました"
       render :edit
     end  
   end
@@ -41,7 +41,7 @@ class Public::ReviewsController < ApplicationController
   def destroy
     post = Post.find(params[:post_id])
     Review.find(params[:id]).destroy
-    flash[:success] = "削除に成功しました"
+    flash[:notice] = "削除に成功しました"
     redirect_to post_path(post.id)
   end
   

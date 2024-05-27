@@ -9,7 +9,7 @@ class Admin::ReviewsController < ApplicationController
   def destroy
     post = Post.find(params[:post_id])
     Review.find(params[:id]).destroy
-    flash[:success] = "削除に成功しました"
+    flash[:notice] = "削除に成功しました"
     redirect_to admin_post_path(post.id)
   end
   

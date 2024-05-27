@@ -31,7 +31,7 @@ class Public::SessionsController < Devise::SessionsController
     user = User.guest
     sign_in user
     redirect_to  "/#{current_user.name}"
-    flash[:success] = "ゲストユーザーとしてログインしました。"
+    flash[:notice] = "ゲストユーザーとしてログインしました。"
    end
 
   def after_sign_in_path_for(resource)
@@ -48,7 +48,7 @@ class Public::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user
       if @user.valid_password?(params[:user][:password]) && !@user.is_active
-        flash[:warning] = 'アカウント停止中のためログインできません。'
+        flash[:alert] = 'アカウント停止中のためログインできません。'
         redirect_to new_user_session_path
       end
     end

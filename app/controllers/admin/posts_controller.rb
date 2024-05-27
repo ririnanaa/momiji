@@ -9,7 +9,7 @@ class Admin::PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      flash[:success] = "削除しました"
+      flash[:notice] = "削除しました"
       redirect_to admin_user_path(@post.user.id)
     end
   end

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :introduction, length: { maximum: 300 }
@@ -30,15 +31,17 @@ class User < ApplicationRecord
   end
 
   # 検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE?", "#{word}")
-    elsif search == "forward_match"
-      @user = User.where("name LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @user = User.where("name LIKE?","%#{word}")
-    else search == "partial_match"
+  def self.looks(word, method)
+    if method == "partial_match"
       @user = User.where("name LIKE?","%#{word}%")
+    elsif method == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif method == "forward_match"
+      @user = User.where("name LIKE?","#{word}%")
+    elsif method == "backward_match"
+      @user = User.where("name LIKE?","%#{word}")
+    else
+      @user = User.all
     end
   end
 

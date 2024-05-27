@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
  # 管理者用
-  devise_for :admin, skip: [:registrations], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
  
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   
      # 会員側のルーティング設定
-  devise_for :user, controllers: {
+  devise_for :user, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
@@ -30,8 +30,12 @@ Rails.application.routes.draw do
     root to: 'homes#top'  
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resource :likes, only: [:create, :destroy]
-      resources :reviews, only: [:new, :index, :create, :edit, :update, :destroy]
+      resources :reviews, only: [:new, :index, :create], shallow: true do
+        resource :favorite, only: [:create, :destroy]
+      end
+      resources :reviews, only: [:edit, :update, :destroy]
     end 
+    
     resources :retirements, only: [:new, :destroy]
     resources :users, except: [:show, :edit, :update] do
       member do
