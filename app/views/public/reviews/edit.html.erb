@@ -52,6 +52,9 @@
           <%= f.submit "保存", class: "btn btn-outline-success btn-lg" %>
         </div>
         <div class="d-flex justify-content-end mb-4">
+          <%= link_to "削除", post_review_path(@review.post, @review), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-outline-danger" %>
+        </div>  
+        <div class="d-flex justify-content-end mb-4">
           <%= link_to "展覧会詳細へ戻る", post_path(@post.id), class: "btn btn-outline-secondary" %>
         </div>
       <% end %>  
