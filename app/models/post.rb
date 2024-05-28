@@ -21,7 +21,6 @@ class Post < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  validates :post_image, presence: true
   validates :name, presence: true, length: { in: 1..75 }
   validates :day, presence: true, length: { in: 1..100 }
   validates :close_day, presence: true, length: { in: 1..100 }

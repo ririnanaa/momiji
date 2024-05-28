@@ -300,7 +300,7 @@ Review.find_or_create_by!(title: "彫刻が見事") do |review|
 end
 
 Review.find_or_create_by!(title: "美しい") do |review|
-  review.rate = 4.0
+  review.rate = 5.0
   review.day = 0
   review.time = 4
   review.congestion = 0

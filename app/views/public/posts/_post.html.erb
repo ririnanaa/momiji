@@ -57,15 +57,15 @@
   </div>
   <div class="m-2">
     <div class="text-secondary">説明</div>
-    <div class="mt-2"><%= post.body %></div>
+    <div class="m-3"><%= post.body %></div>
   </div>  
   <div class="d-flex">
     <div class="m-2 text-secondary">公式サイト</div>
     <div class="m-2"><%= link_to post.url, post.url, class: "text-dark" %></div>
   </div>
-  <div class="d-flex">
-    <div class="m-2 text-secondary">ジャンル</div>
-    <div class="m-2">
+  <div class="m-2">
+    <div class="text-secondary">ジャンル</div>
+    <div class="m-3">
       <% post.genres.each do |genre| %>
         <%= genre.name %>
       <% end %>
