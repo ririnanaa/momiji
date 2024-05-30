@@ -31,7 +31,12 @@
 
           <!-- ユーザーのレビュー一覧 -->
           <div id="tab2" class="tab-pane">
-            <%= render 'userreview', {user: @user, reviews: @reviews} %>
+            <% if user_signed_in? %>
+              <%= render 'userreview', {user: @user, reviews: @reviews} %>
+            <% else %>
+              <h3 class="mt-5" style="color: #3a5b52;">レビュー</h3><br>
+              <p>レビューをご覧になるには、ユーザー登録が必要です。</p>
+            <% end %>  
           </div>
         </div>
         
