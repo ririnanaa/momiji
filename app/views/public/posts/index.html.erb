@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2 class="pl-3 pt-3" style="color: #3a5b52;">展覧会情報</h2>
-    <h5 class="pb-3 text-secondary">（投稿一覧/新着順）</h5>
+    <h5 class="pb-3 text-secondary">（投稿一覧）</h5>
     
     <!-- ジャンル・カテゴリー検索 -->
     <div class="col-md-3 mb-3">
@@ -39,7 +39,7 @@
 
     <!-- 投稿一覧 -->
     <div class="col-md-8 offset-md-1 mx-auto">
-      	<div class="d-flex justify-content-end mb-3">
+      	<div class="d-flex justify-content-end mb-5">
 	  	  <%= render 'layouts/search' %>
 	  	</div>
       <% if params[:genre_id] %>
@@ -48,6 +48,11 @@
 	    	<h5 class="m-2 text-secondary">カテゴリー＜<%= @category.name %>＞</h5>
 	  	<% end %>
 		
+		  <div class="d-flex justify-content-end m-3">
+		    <%= link_to '新着順', posts_path(latest: "true") %>　｜　
+        <%= link_to '古い順', posts_path(old: "true") %>　｜　
+        <%= link_to 'お気に入り順', posts_path(liked: "true") %>
+      </div>  
       <% @posts.each do |post| %>
           <div class="card mb-3" style="max-width: 800px; background-color: #fffaf0;">
             <div class="row g-0">

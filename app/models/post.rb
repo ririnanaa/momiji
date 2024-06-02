@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   has_many :categories, through: :post_categories, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
   has_one_attached :post_image
 
@@ -45,5 +46,15 @@ class Post < ApplicationRecord
       @post = Post.all
     end
   end
+
+  # 並べ替え
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(creatd_at: :asc) }
+  scope :liked, -> {
+    select('posts.*, COUNT(likes.id) AS likes_count')
+      .left_joins(:likes)
+      .group('posts.id')
+      .order('likes_count DESC')
+  }
 
 end

@@ -8,7 +8,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
   has_many :favorites, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :review
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :introduction, length: { maximum: 300 }

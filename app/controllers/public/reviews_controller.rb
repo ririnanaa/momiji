@@ -20,7 +20,15 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = @post.reviews.includes(:user).order(created_at: :desc).joins(:user).where(users: { is_active: true }).page(params[:page])
+    if params[:latest]
+      @reviews = @post.reviews.latest.page(params[:page]).joins(:user).where(users: { is_active: true })
+    elsif params[:old]
+      @reviews = @post.reviews.old.page(params[:page]).joins(:user).where(users: { is_active: true })
+    elsif params[:favorited]
+      @reviews = @post.reviews.favorited.page(params[:page]).joins(:user).where(users: { is_active: true })
+    else 
+      @reviews = @post.reviews.order(created_at: :desc).page(params[:page]).joins(:user).where(users: { is_active: true })
+    end
   end
 
   def edit

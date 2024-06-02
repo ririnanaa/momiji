@@ -31,7 +31,16 @@ class Public::PostsController < ApplicationController
     else
       all_posts = Post.all
     end
-    @posts = all_posts.page(params[:page]).order(created_at: :desc).joins(:user).where(users: { is_active: true })
+    
+    if params[:latest]
+      @posts = Post.latest.page(params[:page]).joins(:user).where(users: { is_active: true })
+    elsif params[:old]
+      @posts = Post.old.page(params[:page]).joins(:user).where(users: { is_active: true })
+    elsif params[:liked]
+      @posts = Post.liked.page(params[:page]).joins(:user).where(users: { is_active: true })
+    else 
+      @posts = all_posts.page(params[:page]).order(created_at: :desc).joins(:user).where(users: { is_active: true })
+    end
   end
   
   def show
@@ -79,4 +88,3 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:name, :post_image, :day, :close_day, :hour, :url, :place, :address, :body, genre_ids:[], category_ids:[])
   end
 end
-
