@@ -16,3 +16,15 @@
 .navbar-toggler{
   border-color: #ffffff;
 }
+
+.new-img{
+  width: 210px;
+  height: 297px;
+  object-fit: cover;
+}
+
+.new-profile-img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

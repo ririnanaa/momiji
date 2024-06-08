@@ -11,8 +11,13 @@
   <div class="mb-2">ポスター写真<br>
     <%= f.file_field :post_image, accept: "image/*" %>
   </div>
+  <div id="new-image">
+    <% if post.post_image.present? %>
+      <%= image_tag post.get_post_image(210,297), id: "new-img-preview" %>
+    <% end %>
+  </div>
   <div class="mb-2">展覧会名<br>
-    <%= f.text_field :name, placeholder: "北斎展" %>
+    <%= f.text_field :name, placeholder: "〇〇展" %>
   </div>
   <div class="mb-2">会期<br>
     <%= f.text_field :day, placeholder: "〇月〇日〜〇月×日" %>
