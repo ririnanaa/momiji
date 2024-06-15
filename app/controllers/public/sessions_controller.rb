@@ -27,6 +27,7 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   
+   #ゲストログイン
    def guest_sign_in
     user = User.guest
     sign_in user
@@ -34,16 +35,19 @@ class Public::SessionsController < Devise::SessionsController
     flash[:notice] = "ゲストユーザーとしてログインしました。"
    end
 
+  #ログイン後遷移先
   def after_sign_in_path_for(resource)
     "/#{current_user.name}"
   end
 
+  #ログアウト後遷移先
   def after_sign_out_path_for(resource)
     root_path
   end
 
   private
-
+  
+  #停止アカウントのログイン却下
   def reject_inactive_user
     @user = User.find_by(email: params[:user][:email])
     if @user

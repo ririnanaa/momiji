@@ -28,7 +28,12 @@
 ・趣味の合う人との交流がしたい時
 ​
 ## 設計書
+- ER図
+![ER図詳細](img/pf-er.png)
 
+- アプリケーション詳細設計
+![会員側](img/pf-detailed-public.png)
+![管理者側](img/pf-detailed-admin.png)
 ​
 ## 開発環境
 - OS：Linux(CentOS)

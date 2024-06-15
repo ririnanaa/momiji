@@ -45,6 +45,7 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:profile_image, :name, :introduction, :email )
   end
  
+ #ゲストログイン時のユーザー編集不可
   def ensure_normal_user
     if @user.email == 'guest@example.com'
       flash[:error] = 'ゲストユーザーは更新できません。'
