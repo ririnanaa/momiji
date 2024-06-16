@@ -36,9 +36,10 @@
 ![管理者側](img/pf-detailed-admin.png)
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(Amazon Linux release 2023)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
+- CSSフレームワーク:Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
