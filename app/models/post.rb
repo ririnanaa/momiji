@@ -49,7 +49,7 @@ class Post < ApplicationRecord
 
   # 並べ替え
   scope :latest, -> { order(created_at: :desc) }
-  scope :old, -> { order(creatd_at: :asc) }
+  scope :old, -> { order(created_at: :asc) }
   scope :liked, -> {
     select('posts.*, COUNT(likes.id) AS likes_count')
       .left_joins(:likes)

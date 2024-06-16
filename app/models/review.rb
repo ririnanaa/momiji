@@ -19,7 +19,7 @@ class Review < ApplicationRecord
     
   # 並べ替え
   scope :latest, -> { order(created_at: :desc) }
-  scope :old, -> { order(creatd_at: :asc) }
+  scope :old, -> { order(created_at: :asc) }
   scope :favorited, -> {
     select('reviews.*, COUNT(favorites.id) AS favorites_count')
       .left_joins(:favorites)
