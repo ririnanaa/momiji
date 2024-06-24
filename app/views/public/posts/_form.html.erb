@@ -12,8 +12,8 @@
     <%= f.file_field :post_image, accept: "image/*" %>
   </div>
   <div id="new-image">
-    <% if post.post_image.present? %>
-      <%= image_tag post.get_post_image(210,297), id: "new-img-preview" %>
+    <% if post.id && post.post_image.attached? %>
+      <%= image_tag Post.find(post.id).get_post_image(210,297), id: "new-img-preview" %>
     <% end %>
   </div>
   <div class="mb-2">展覧会名<br>
@@ -41,11 +41,11 @@
     <%= f.text_field :url, size: "30x5" %>
   </div>
   <div class="mb-2">ジャンル選択（複数選択可）</div>
-  <div class="mb-2"><%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %></div> 
+  <div class="mb-2"><%= f.collection_check_boxes :genre_ids, Genre.all, :id, :name %></div>
   <div class="mb-2">カテゴリー選択（複数選択可）</div>
-  <div class="mb-2"><%= f.collection_check_boxes :category_ids, Category.all, :id, :name %></div>  
+  <div class="mb-2"><%= f.collection_check_boxes :category_ids, Category.all, :id, :name %></div>
   <div class="d-flex justify-content-end mb-4">
     <%= f.submit '保存', class: "btn btn-outline-success btn-lg" %>
-  </div>  
+  </div>
 <% end %>
 

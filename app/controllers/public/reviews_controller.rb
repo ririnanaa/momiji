@@ -1,7 +1,7 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:new, :create, :index, :edit, :update]
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   
   def new
     @review = Review.new
