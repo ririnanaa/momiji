@@ -8,13 +8,15 @@
 <% end %>
 
 <%= form_with model: post, local:true do |f| %>
-  <div class="mb-2">ポスター写真<br>
-    <%= f.file_field :post_image, accept: "image/*" %>
-  </div>
-  <div id="new-image">
-    <% if post.id && post.post_image.attached? %>
-      <%= image_tag Post.find(post.id).get_post_image(210,297), id: "new-img-preview" %>
-    <% end %>
+  <div class="mb-2">
+    <%= f.label :post_image, 'ポスター写真' %>
+    <div id="new-image">
+      <% if post.post_image.attached? %>
+        <%= image_tag post.get_post_image(210,297), id: "new-img-preview" %>
+      <% end %>
+      <%= f.hidden_field :post_image, id:'post_image_hidden', value: post.post_image.signed_id if post.post_image.attached? %>
+      <%= f.file_field :post_image,direct_upload: true  %>
+    </div>
   </div>
   <div class="mb-2">展覧会名<br>
     <%= f.text_field :name, placeholder: "〇〇展" %>
